@@ -1,8 +1,8 @@
 package user;
 
 import org.springframework.stereotype.Component;
-
 @Component 
+
 public class SessionManager {
 
     // Dummy implementation, you can replace this with real session management logic (JWT, etc.)
