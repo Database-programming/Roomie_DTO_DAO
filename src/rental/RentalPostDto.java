@@ -1,7 +1,7 @@
 package rental;
 import user.User;
 import java.util.Date;
-public class RentalPost {
+public class RentalPostDto {
 
     private int id; // 대여글 ID
     private int type; // 대여글 타입 (0: 대여요청, 1: 대여제공
@@ -18,9 +18,9 @@ public class RentalPost {
     private User writer; // 작성자 (외래키로 User 객체 참조)
 
     // 생성자
-    public RentalPost() {}
+    public RentalPostDto() {}
 
-    public RentalPost(int id, int type, String title, String rentalItem, String content, int rentalPoint, Date rentalStartDate,
+    public RentalPostDto(int id, int type, String title, String rentalItem, String content, int rentalPoint, Date rentalStartDate,
                       Date rentalEndDate, String rentalLocation, String returnLocation, String imageUrl, int status, User writer) {
         this.id = id;
         this.type = type;

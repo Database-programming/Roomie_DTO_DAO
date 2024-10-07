@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RentalPostDao {
+public class RentalPostDAO {
 
     private Connection getConnection() throws SQLException {
         String url = "jdbc:oracle:thin:@localhost:1521:xe"; // Oracle 연결 정보
@@ -12,7 +12,7 @@ public class RentalPostDao {
     }
 
     // 대여글 등록
-    public void insertRentalPost(RentalPost rentalPost) {
+    public void insertRentalPost(RentalPostDto rentalPost) {
         String sql = "INSERT INTO RentalPosts (id, type, title, rental_item, content, rental_point, " +
                      "rental_start_date, rental_end_date, rental_location, return_location, image_url, status, writer_id) " +
                      "VALUES (rental_post_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -38,9 +38,9 @@ public class RentalPostDao {
     }
 
     // 특정 대여글 조회
-    public RentalPost selectRentalPostById(int id) {
+    public RentalPostDto selectRentalPostById(int id) {
         String sql = "SELECT * FROM RentalPosts WHERE id = ?";
-        RentalPost rentalPost = null;
+        RentalPostDto rentalPost = null;
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -48,7 +48,7 @@ public class RentalPostDao {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                rentalPost = new RentalPost();
+                rentalPost = new RentalPostDto();
                 rentalPost.setId(rs.getInt("id"));
                 rentalPost.setType(rs.getInt("type"));
                 rentalPost.setTitle(rs.getString("title"));
@@ -69,9 +69,9 @@ public class RentalPostDao {
     }
 
     // 제목으로 대여글 검색
-    public List<RentalPost> selectRentalPostsByTitle(String title) {
+    public List<RentalPostDto> selectRentalPostsByTitle(String title) {
         String sql = "SELECT * FROM RentalPosts WHERE title LIKE ?";
-        List<RentalPost> rentalPostList = new ArrayList<>();
+        List<RentalPostDto> rentalPostList = new ArrayList<>();
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -79,7 +79,7 @@ public class RentalPostDao {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                RentalPost rentalPost = new RentalPost();
+                RentalPostDto rentalPost = new RentalPostDto();
                 rentalPost.setId(rs.getInt("id"));
                 rentalPost.setType(rs.getInt("type"));
                 rentalPost.setTitle(rs.getString("title"));
@@ -101,16 +101,16 @@ public class RentalPostDao {
     }
 
     // 모든 대여글 조회
-    public List<RentalPost> selectAllRentalPosts() {
+    public List<RentalPostDto> selectAllRentalPosts() {
         String sql = "SELECT * FROM RentalPosts";
-        List<RentalPost> rentalPostList = new ArrayList<>();
+        List<RentalPostDto> rentalPostList = new ArrayList<>();
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                RentalPost rentalPost = new RentalPost();
+                RentalPostDto rentalPost = new RentalPostDto();
                 rentalPost.setId(rs.getInt("id"));
                 rentalPost.setType(rs.getInt("type"));
                 rentalPost.setTitle(rs.getString("title"));
@@ -145,7 +145,7 @@ public class RentalPostDao {
     }
 
     // 대여글 수정
-    public void updateRentalPost(RentalPost rentalPost) {
+    public void updateRentalPost(RentalPostDto rentalPost) {
         String sql = "UPDATE RentalPosts SET type = ?, title = ?, rental_item = ?, content = ?, rental_point = ?, " +
                      "rental_start_date = ?, rental_end_date = ?, rental_location = ?, return_location = ?, image_url = ?, status = ? " +
                      "WHERE id = ?";

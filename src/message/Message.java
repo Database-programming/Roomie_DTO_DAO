@@ -2,20 +2,20 @@ package message;
 
 import java.util.Date;
 import user.User;
-import rental.RentalPost;
+import rental.RentalPostDto;
 
 public class Message {
     private int id; // 쪽지 ID
     private String content; // 내용
     private Date sentDate; // 작성일
     private int status; // 상태 (0 : 진행 전, 1: 완료)
-    private RentalPost rentalPostId; // 대여글 id 외래키로
+    private RentalPostDto rentalPostId; // 대여글 id 외래키로
     private User sender; // 발신자
     private User receiver; // 수신자
 
     // 생성자
     public Message() {}
-    public Message(int id, String content, Date sentDate, int status, RentalPost rentalPostId, User sender, User receiver) {
+    public Message(int id, String content, Date sentDate, int status, RentalPostDto rentalPostId, User sender, User receiver) {
         this.id = id;
         this.content = content;
         this.sentDate = sentDate;
@@ -58,11 +58,11 @@ public class Message {
         this.status = status;
     }
 
-    public RentalPost getRentalPostId() {
+    public RentalPostDto getRentalPostId() {
         return rentalPostId;
     }
 
-    public void setRentalPostId(RentalPost rentalPostId) {
+    public void setRentalPostId(RentalPostDto rentalPostId) {
         this.rentalPostId = rentalPostId;
     }
 

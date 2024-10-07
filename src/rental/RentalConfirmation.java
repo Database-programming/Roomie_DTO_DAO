@@ -8,14 +8,14 @@ public class RentalConfirmation {
     private LocalDate actualReturnDate;  // 실제 반납 날짜
     private int penaltyPoints;           // 벌점
     private int overdueDays;             // 연체 일수
-    private RentalPost rentalPost;       // 대여글 (RentalPost 객체 참조)
+    private RentalPostDto rentalPost;       // 대여글 (RentalPost 객체 참조)
     private User requester;              // 요청자 (User 객체 참조)
     private User provider;               // 제공자 (User 객체 참조)
 
     public RentalConfirmation() {}
 
     public RentalConfirmation(long id, LocalDate actualReturnDate, int penaltyPoints, int overdueDays,
-                              RentalPost rentalPost, User requester, User provider) {
+                              RentalPostDto rentalPost, User requester, User provider) {
         this.id = id;
         this.actualReturnDate = actualReturnDate;
         this.penaltyPoints = penaltyPoints;
@@ -58,11 +58,11 @@ public class RentalConfirmation {
         this.overdueDays = overdueDays;
     }
 
-    public RentalPost getRentalPost() {
+    public RentalPostDto getRentalPost() {
         return rentalPost;
     }
 
-    public void setRentalPost(RentalPost rentalPost) {
+    public void setRentalPost(RentalPostDto rentalPost) {
         this.rentalPost = rentalPost;
     }
 
